@@ -42,8 +42,10 @@ pipeline {
       }
       steps {
         script {
-          docker.withRegistry('https://ghcr.io', 'github-app-archessmn') {
-            image.push()
+          docker.withTool("/run/current-system/sw/bin/docker") {
+            docker.withRegistry('https://ghcr.io', 'github-app-archessmn') {
+              image.push()
+            }
           }
         }
       }
