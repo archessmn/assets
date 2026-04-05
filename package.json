@@ -1,0 +1,51 @@
+{
+  "name": "assets",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/lib",
+    "packages/next",
+    "packages/server"
+  ],
+  "scripts": {
+    "dev": "nodemon",
+    "db:generate": "yarn workspace @repo/lib run db:generate",
+    "db:migrate": "yarn workspace @repo/lib run db:migrate:dev",
+    "db:push": "yarn workspace @repo/lib run db:push",
+    "db:studio": "prisma studio",
+    "build:all": "yarn build:lib && yarn build:next && yarn build:server",
+    "build:lib": "yarn workspace @repo/lib run build",
+    "build:next": "yarn workspace @repo/next run build",
+    "build:server": "yarn build:server:compile",
+    "build:server:compile": "cd packages/server && tsc -p tsconfig.build.json",
+    "check": "prettier -c .",
+    "check:write": "prettier --write .",
+    "preinstall": "yarn constraints --fix"
+  },
+  "dependencies": {
+    "@prisma/client": "7.5.0",
+    "@yarnpkg/types": "^4.0.1",
+    "next": "16.2.1",
+    "react": "19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vercel/ncc": "^0.38.4",
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "prisma": "7.5.0",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5",
+    "zod": "^4.1.12"
+  },
+  "packageManager": "yarn@4.13.0"
+}

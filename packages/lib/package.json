@@ -1,0 +1,30 @@
+{
+  "name": "@repo/lib",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "build": "tsc && tsc-alias",
+    "db:generate": "dotenv -e ../../.env prisma generate",
+    "db:migrate:dev": "dotenv -e ../../.env prisma migrate dev",
+    "db:migrate:prod": "dotenv -e ../../.env prisma migrate deploy",
+    "db:push": "dotenv -e ../../.env prisma db push"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "7.5.0",
+    "@socket.io/redis-emitter": "^5.1.0",
+    "better-auth": "^1.5.6",
+    "dotenv-cli": "^11.0.0",
+    "ioredis": "^5.10.1",
+    "minio": "^8.0.6",
+    "prisma": "7.5.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5"
+  }
+}
