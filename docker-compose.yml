@@ -1,11 +1,9 @@
 services:
-  redis:
-    image: redis:7
+  valkey:
+    image: valkey/valkey:9
     ports:
       - "6379:6379"
-    command: ["redis-server", "--appendonly", "yes"]
-    volumes:
-      - redis-data:/data
+    command: ["valkey-server", "--appendonly", "yes"]
 
   database:
     # Official Postgres image from DockerHub (we use the last version)

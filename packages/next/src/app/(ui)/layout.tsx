@@ -48,7 +48,7 @@ export default async function RootLayout({
             <TRPCReactProvider>
               <MantineProvider defaultColorScheme="auto">
                 <ModalsProvider>
-                  <AppLayout>{children}</AppLayout>
+                  {children}
                   <Notifications />
                 </ModalsProvider>
               </MantineProvider>

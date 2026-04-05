@@ -5,14 +5,18 @@ import { redirect } from "next/navigation";
 
 export default async function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ assetId: string }>;
+}>) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  if (!session) {
-    return redirect("/signin");
+  if (session) {
+    return redirect(`/asset/${(await params).assetId}`);
   }
 
-  return <AppLayout defaultOpen>{children}</AppLayout>;
+  return children;
 }

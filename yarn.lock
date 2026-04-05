@@ -2005,6 +2005,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"assets@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "assets@workspace:."
+  dependencies:
+    "@prisma/client": "npm:7.5.0"
+    "@types/bun": "npm:latest"
+    "@types/react": "npm:^19"
+    "@types/react-dom": "npm:^19"
+    "@vercel/ncc": "npm:^0.38.4"
+    "@yarnpkg/types": "npm:^4.0.1"
+    dotenv: "npm:^17.2.3"
+    dotenv-cli: "npm:^11.0.0"
+    next: "npm:16.2.1"
+    nodemon: "npm:^3.1.11"
+    prettier: "npm:^3.8.1"
+    prettier-plugin-tailwindcss: "npm:^0.7.2"
+    prisma: "npm:7.5.0"
+    react: "npm:19.2.4"
+    react-dom: "npm:^19.2.4"
+    socket.io: "npm:^4.8.3"
+    socket.io-client: "npm:^4.8.3"
+    tsx: "npm:^4.20.6"
+    typescript: "npm:^5"
+    zod: "npm:^4.1.12"
+  languageName: unknown
+  linkType: soft
+
 "ast-types@npm:^0.13.4":
   version: 0.13.4
   resolution: "ast-types@npm:0.13.4"
@@ -6419,33 +6446,6 @@ __metadata:
   checksum: 10c0/4df2842c36e468590c3691c894bc9cdbac41f520566e76e24f59401ba7d8b4811eb1e34524d57e54bc6d864bcb66baab7ffd9ca42bf1eda596618f9162b91249
   languageName: node
   linkType: hard
-
-"y3-project@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "y3-project@workspace:."
-  dependencies:
-    "@prisma/client": "npm:7.5.0"
-    "@types/bun": "npm:latest"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
-    "@vercel/ncc": "npm:^0.38.4"
-    "@yarnpkg/types": "npm:^4.0.1"
-    dotenv: "npm:^17.2.3"
-    dotenv-cli: "npm:^11.0.0"
-    next: "npm:16.2.1"
-    nodemon: "npm:^3.1.11"
-    prettier: "npm:^3.8.1"
-    prettier-plugin-tailwindcss: "npm:^0.7.2"
-    prisma: "npm:7.5.0"
-    react: "npm:19.2.4"
-    react-dom: "npm:^19.2.4"
-    socket.io: "npm:^4.8.3"
-    socket.io-client: "npm:^4.8.3"
-    tsx: "npm:^4.20.6"
-    typescript: "npm:^5"
-    zod: "npm:^4.1.12"
-  languageName: unknown
-  linkType: soft
 
 "yallist@npm:^4.0.0":
   version: 4.0.0

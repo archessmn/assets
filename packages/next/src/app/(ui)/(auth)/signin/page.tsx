@@ -3,32 +3,33 @@
 import { useAppForm } from "@/app/_components/form";
 import { api } from "@/trpc/react";
 import { Button } from "@mantine/core";
-import { signUp } from "@repo/lib/auth/client";
+import { signIn } from "@repo/lib/auth/client";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 import z from "zod";
 
 export default function SignInPage() {
-  const schema = z.object({
-    name: z.string(),
-    email: z.email(),
-    password: z.string(),
-  });
+  const schema = z.object({ email: z.email(), password: z.string() });
+
+  const router = useRouter();
 
   const form = useAppForm({
     validators: {
       onChange: schema,
     },
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
     onSubmit: async ({ value }) => {
-      signUp.email({
-        name: value.name,
+      const res = await signIn.email({
         email: value.email,
         password: value.password,
       });
+
+      if (res.data) {
+        router.push("/");
+      }
     },
   });
 
@@ -40,10 +41,6 @@ export default function SignInPage() {
         form.handleSubmit();
       }}
     >
-      <form.AppField name="name">
-        {(field) => <field.TextField label="Name" />}
-      </form.AppField>
-
       <form.AppField name="email">
         {(field) => <field.TextField label="Email" />}
       </form.AppField>

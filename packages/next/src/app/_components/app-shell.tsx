@@ -4,6 +4,7 @@ import {
   AppShell,
   Badge,
   Burger,
+  Center,
   Group,
   HoverCard,
   NavLink,
@@ -18,15 +19,20 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { useSession } from "./session-provider";
 
-export function AppLayout(props: { children: ReactNode }) {
+export function AppLayout(props: {
+  defaultOpen?: boolean;
+  children: ReactNode;
+}) {
   const pathname = usePathname();
 
+  const session = useSession();
+
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(
+    props.defaultOpen,
+  );
 
   const queryClient = useQueryClient();
-
-  const session = useSession();
 
   const { socket, isConnected, transport } = useWebsocket();
 
@@ -58,46 +64,7 @@ export function AppLayout(props: { children: ReactNode }) {
               visibleFrom="sm"
             />
             <Text>{session.data?.user.name}</Text>
-            <Group ml={"auto"}>
-              <HoverCard>
-                <HoverCard.Target>
-                  <Badge color={isConnected ? "green" : "red"}>
-                    <Text size="xs">
-                      {isConnected ? "Connected" : "Not Connected"}
-                    </Text>
-                  </Badge>
-                </HoverCard.Target>
-                <HoverCard.Dropdown>
-                  <Group>
-                    <Text>Socket connected:</Text>
-                    <Text ml={"auto"}>{`${isConnected.valueOf()}`}</Text>
-                  </Group>
-                  <Group>
-                    <Text>Transport:</Text>
-                    <Text ml={"auto"}>{transport}</Text>
-                  </Group>
-                  <Group>
-                    <Text>Socket ID:</Text>
-                    <Text
-                      c={clipboard.copied ? "green" : ""}
-                      ml={"auto"}
-                      onClick={() => {
-                        clipboard.copy(socket.id);
-                        notifications.show({
-                          message: "Copied!",
-                          autoClose: 2000,
-                        });
-                      }}
-                      style={{
-                        cursor: "pointer",
-                      }}
-                    >
-                      {socket.id}
-                    </Text>
-                  </Group>
-                </HoverCard.Dropdown>
-              </HoverCard>
-            </Group>
+            <Group ml={"auto"}></Group>
           </Group>
         </AppShell.Header>
         <AppShell.Navbar p="md">
@@ -113,6 +80,46 @@ export function AppLayout(props: { children: ReactNode }) {
             href={"/events"}
             label={"Events"}
           />
+          <Center mt={"auto"}>
+            <HoverCard>
+              <HoverCard.Target>
+                <Badge color={isConnected ? "green" : "red"}>
+                  <Text size="xs">
+                    {isConnected ? "Connected" : "Not Connected"}
+                  </Text>
+                </Badge>
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <Group>
+                  <Text>Socket connected:</Text>
+                  <Text ml={"auto"}>{`${isConnected.valueOf()}`}</Text>
+                </Group>
+                <Group>
+                  <Text>Transport:</Text>
+                  <Text ml={"auto"}>{transport}</Text>
+                </Group>
+                <Group>
+                  <Text>Socket ID:</Text>
+                  <Text
+                    c={clipboard.copied ? "green" : ""}
+                    ml={"auto"}
+                    onClick={() => {
+                      clipboard.copy(socket.id);
+                      notifications.show({
+                        message: "Copied!",
+                        autoClose: 2000,
+                      });
+                    }}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    {socket.id}
+                  </Text>
+                </Group>
+              </HoverCard.Dropdown>
+            </HoverCard>
+          </Center>
         </AppShell.Navbar>
         <AppShell.Main>{props.children}</AppShell.Main>
       </AppShell>
