@@ -1,10 +1,3 @@
 # ASSETS
 
-A
-S
-S
-Equipment
-Tracking
-System
-
-(Need to work on the name lol)
+ASSet and Equipment Tracking System
