@@ -12,6 +12,9 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "test", "production"])
     .default("development"),
+  OAUTH_CLIENT_ID: z.string(),
+  OAUTH_CLIENT_SECRET: z.string(),
+  OAUTH_DISCOVERY_URL: z.string(),
   // MINIO_ENDPOINT: z.string(),
   // MINIO_USE_SSL: z.enum(["true", "false"]).default("false"),
   // MINIO_BUCKET: z.string(),

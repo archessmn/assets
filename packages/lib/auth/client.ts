@@ -1,4 +1,5 @@
 import { createAuthClient } from "better-auth/react";
+import { genericOAuthClient } from "better-auth/client/plugins";
 
 export const {
   signIn,
@@ -6,4 +7,6 @@ export const {
   signUp,
   useSession: useBetterAuthSession,
   $Infer: { Session: AuthClientSession },
-} = createAuthClient();
+} = createAuthClient({
+  plugins: [genericOAuthClient()],
+});

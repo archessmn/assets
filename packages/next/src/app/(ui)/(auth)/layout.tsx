@@ -13,5 +13,9 @@ export default async function RootLayout({
     return redirect("/");
   }
 
-  return <>{children}</>;
+  return (
+    <div style={{ display: "grid", placeItems: "center", height: "100vh" }}>
+      {children}
+    </div>
+  );
 }
