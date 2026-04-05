@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1
 
 FROM node:20-alpine AS base
-RUN apk update && apk add ffmpeg chromium redis
+RUN apk update && apk add valkey
 
 FROM base AS install
 RUN apk update && apk add alpine-sdk python3
@@ -16,7 +16,6 @@ COPY packages/lib/prisma.config.ts    ./packages/lib/
 COPY ./prisma.config.ts    .
 COPY prisma/schema.prisma ./prisma/schema.prisma
 COPY prisma/models ./prisma/models
-ENV PUPPETEER_SKIP_DOWNLOAD=true
 RUN --mount=type=cache,target=.yarn/cache \
   yarn install --immutable
 
@@ -54,13 +53,12 @@ COPY --from=install /app/prisma.config.ts /app
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PUPPETEER_CHROME_PATH=/usr/bin/chromium
 ENV HOSTNAME="0.0.0.0"
 
 COPY --chmod=755 <<EOT /app/entrypoint.sh
 #!/bin/sh
 set -e
-redis-server --daemonize yes && node packages/server/build/index.js
+valkey-server --daemonize yes && node packages/server/build/index.js
 EOT
 
 CMD ["./entrypoint.sh"]
