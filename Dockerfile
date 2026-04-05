@@ -45,7 +45,6 @@ COPY --from=build /app/packages/lib/build /app/packages/lib/
 COPY --from=build /app/packages/next/.next /app/packages/next/.next
 COPY --from=build /app/packages/next/public /app/packages/next/public
 COPY --from=build /app/packages/next/next.config.js /app/packages/next/next.config.js
-COPY --from=build /app/assets /app/assets
 
 # Copy these in so that we can still run Prisma migrations in prod
 COPY --from=build /app/prisma/schema.prisma /app/prisma/schema.prisma
