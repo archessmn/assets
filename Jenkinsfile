@@ -41,11 +41,10 @@ pipeline {
         }
       }
       steps {
+        sh "docker login -u ${env.GITHUB_CREDS_USR} -p ${env.GITHUB_CREDS_PSW} https://ghcr.io"
         script {
-          docker.withTool("/run/current-system/sw/bin/docker") {
-            docker.withRegistry('https://ghcr.io', 'github-app-archessmn') {
-              image.push()
-            }
+          docker.withRegistry('https://ghcr.io') {
+            image.push()
           }
         }
       }
