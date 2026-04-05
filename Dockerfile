@@ -58,6 +58,7 @@ ENV HOSTNAME="0.0.0.0"
 COPY --chmod=755 <<EOT /app/entrypoint.sh
 #!/bin/sh
 set -e
+npx -y prisma migrate deploy
 valkey-server --daemonize yes && node packages/server/build/index.js
 EOT
 
